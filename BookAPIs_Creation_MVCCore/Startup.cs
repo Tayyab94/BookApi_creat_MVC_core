@@ -31,6 +31,9 @@ namespace BookAPIs_Creation_MVCCore
             //Connection String 
             var connectionString = Configuration["connectionStrings:bookDbConnectionString"];
             services.AddDbContext<BookDbContext>(c => c.UseSqlServer(connectionString));
+
+            services.AddScoped<ICountryRepository, CounytyRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +44,11 @@ namespace BookAPIs_Creation_MVCCore
                 app.UseDeveloperExceptionPage();
             }
 
-            context.SeedDataContext();
+          // context.SeedDataContext();
+          
             //Use MVC Service
             app.UseMvc();
+            
             //app.Run(async (context) =>
             //{
             //    await context.Response.WriteAsync("Hello World!");
