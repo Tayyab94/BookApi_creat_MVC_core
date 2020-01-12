@@ -11,7 +11,7 @@ namespace BookAPIs_Creation_MVCCore.Serivces
         ICollection<Reviewer> GetReviewers();
         Reviewer GetReviewer(int reviewerId);
         ICollection<Review> GetReviewsByReviewer(int reviewerId);
-        Review GetReviewerOfReview(int reviewId);
+        Reviewer GetReviewerOfReview(int reviewId);
         bool ReviewerExist(int reviewerId);
     }
 }

@@ -14,7 +14,7 @@ namespace BookAPIs_Creation_MVCCore.Models
 
         public int id { get; set; }
         [Required]
-        [MaxLength(100, ErrorMessage = "Country Name must be upto 100 Charactors.")]
+        [MaxLength(100, ErrorMessage = "Country Name must be upto 10    0 Charactors.")]
 
         public string first_Name { get; set; }
         [Required]

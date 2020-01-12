@@ -13,10 +13,12 @@ namespace BookAPIs_Creation_MVCCore.Controllers
     public class CountryController:Controller
     {
         private readonly ICountryRepository countryRepository;
+        private readonly IAuthoRepository authoRepository;
 
-        public CountryController(ICountryRepository countryRepository)
+        public CountryController(ICountryRepository countryRepository, IAuthoRepository authoRepository)
         {
             this.countryRepository = countryRepository;
+            this.authoRepository = authoRepository;
         }
 
 
@@ -75,6 +77,11 @@ namespace BookAPIs_Creation_MVCCore.Controllers
         [ProducesResponseType(200, Type = typeof(CountryDTO))]
         public IActionResult GetCountryOfAuthor(int authorId)
         {
+
+            // Todo validae the Author Exist or Not
+
+            if (!authoRepository.AuthorExist(authorId))
+                return BadRequest();
             var countries = countryRepository.GetCounytyOfAuthor(authorId);
             if (!ModelState.IsValid)
             {
