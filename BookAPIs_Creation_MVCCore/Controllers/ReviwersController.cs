@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace BookAPIs_Creation_MVCCore.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class ReviwersController :Controller
     {
         private readonly IReviewerRepository reviewerRepository;
