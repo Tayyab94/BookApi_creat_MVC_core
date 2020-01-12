@@ -96,5 +96,35 @@ namespace BookAPIs_Creation_MVCCore.Controllers
 
         // Todo GetBooksForCategory
 
+        [HttpGet("{categoryId}/books")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<BookDTO>))]
+
+        public IActionResult GetBooksForCategory(int categoryId)
+        {
+            if (!categoryRepository.CategoryExist(categoryId))
+                return NotFound();
+
+            var author = categoryRepository.GetBooksForCategory(categoryId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var bookDTO_list = new List<BookDTO>();
+
+            foreach (var item in author)
+            {
+                bookDTO_list.Add(new BookDTO
+                {
+                    Id = item.id,
+                   Title   = item.title,
+                    Isbn=item.isbn,
+                     Date_Published=item.date_Published
+                });
+            }
+
+            return Ok(bookDTO_list);
+        }
     }
 }

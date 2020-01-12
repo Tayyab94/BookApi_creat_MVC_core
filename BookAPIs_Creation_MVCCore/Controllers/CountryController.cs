@@ -89,5 +89,37 @@ namespace BookAPIs_Creation_MVCCore.Controllers
             return Ok(County);
 
         }
+
+
+        //api/countries/countryId/author
+        [HttpGet("{countryId}/author")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<CountryDTO>))]
+
+        public IActionResult GetAuthorsFromCountry(int countryId)
+        {
+            if (!countryRepository.CoutryExist(countryId))
+                return NotFound();
+
+            var author = countryRepository.GetAuthorFromCountry(countryId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var authorDTO_list = new List<AuthorDTO>();
+
+            foreach (var item in author)
+            {
+                authorDTO_list.Add(new AuthorDTO
+                {
+                     Id=item.id,
+                      FirstName=item.first_Name,
+                       LastName=item.last_NameW
+                });
+            }
+
+            return Ok(authorDTO_list);
+        }
     }
 }
