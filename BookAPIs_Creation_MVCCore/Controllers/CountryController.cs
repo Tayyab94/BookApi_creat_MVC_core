@@ -77,7 +77,6 @@ namespace BookAPIs_Creation_MVCCore.Controllers
         [ProducesResponseType(200, Type = typeof(CountryDTO))]
         public IActionResult GetCountryOfAuthor(int authorId)
         {
-
             // Todo validae the Author Exist or Not
 
             if (!authoRepository.AuthorExist(authorId))
@@ -87,14 +86,13 @@ namespace BookAPIs_Creation_MVCCore.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             var County = new CountryDTO()
             {
                 id = countries.id,
                 name = countries.name
             };
-
             return Ok(County);
-
         }
 
 
